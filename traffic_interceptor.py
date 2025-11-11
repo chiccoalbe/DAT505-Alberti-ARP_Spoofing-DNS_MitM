@@ -2,16 +2,10 @@
 """
 traffic_interceptor.py
 
-Parser that takes pcap ad extracts 
-
 Usage:
   python3 pcap_parser.py /path/to/file.pcap
 
-Outputs (in same dir as input pcap):
-  urls.csv         - http_host,http_uri,src_ip,dst_ip,frame_time
-  dns_queries.csv  - time,src_ip,qname,qtype,is_response,answers (pipe-separated)
-  top_talkers.csv  - ip,packets,bytes
-  proto_counts.csv - proto_number,proto_name,count
+  
 """
 
 import sys
@@ -75,7 +69,7 @@ def parse_pcap(path):
                     tcp = ip.data
                 except Exception:
                     continue
-                # detect HTTP request (naive)
+                # detect HTTP request 
                 if len(tcp.data) > 0:
                     # try parse as HTTP request
                     try:
@@ -84,7 +78,6 @@ def parse_pcap(path):
                         uri = req.uri
                         urls.append((ts, src, dst, host, uri))
                     except (dpkt.UnpackError, dpkt.NeedData):
-                        # not a full HTTP request in this segment
                         pass
                     except Exception:
                         pass
@@ -104,7 +97,6 @@ def parse_pcap(path):
                                 answers = []
                                 if is_resp:
                                     for a in dns.an:
-                                        # Grab A/AAAA answers and other types
                                         if a.type == dpkt.dns.DNS_A:
                                             answers.append(socket.inet_ntoa(a.rdata))
                                         elif a.type == dpkt.dns.DNS_AAAA:
@@ -113,7 +105,7 @@ def parse_pcap(path):
                                             except Exception:
                                                 pass
                                         else:
-                                            # store textual repr
+                                            
                                             answers.append(f"{a.name}:{a.type}")
                                 dns_rows.append((ts, src, qname, qtype, is_resp, answers))
                         except (dpkt.UnpackError, IndexError):

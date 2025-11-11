@@ -76,3 +76,43 @@ sudo python3 arp_spoof.py \
 * `-n, --interval` — Poisoning interval in seconds (default `2.0`).
 * `-V, --verbose` — Verbose output (prints resolved MACs and status).
 
+
+
+# traffic_interceptor.py — Quick Reference
+
+## What it does
+
+Takes an input pcap file and computes 4 csv file results:
+- urls.csv: http_host,http_uri,src_ip,dst_ip,frame_time
+- dns_queries.csv;time,src_ip,qname,qtype,is_response,answers 
+- top_talkers.csv: ip,packets,bytes
+- proto_counts.csv: proto_number,proto_name,count
+
+## Usage
+
+```bash
+sudo python3 arp_spoof.py -i <iface> -v <victim_ip> -g <gateway_ip> [--enable-forward] [-n <interval>] [-V]
+```
+
+### Example
+
+```bash
+sudo python3 arp_spoof.py \
+  -i eth0 \
+  -v 192.168.200.129 \
+  -g 192.168.200.131 \
+  --enable-forward \
+  -n 2 -V
+```
+
+## CLI options
+
+* `-v, --victim` **(required)** — Victim IP to target (e.g. `192.168.200.129`).
+* `-g, --gateway` **(required)** — Gateway IP to poison (e.g. `192.168.200.131`).
+* `-i, --iface` **(required)** — Network interface to use (e.g. `eth0`).
+* `--victim-mac` — Victim MAC address (optional). If omitted, script will resolve it via ARP.
+* `--gateway-mac` — Gateway MAC address (optional). If omitted, script will resolve it via ARP.
+* `--enable-forward` — Enable Linux IP forwarding on the attacker so intercepted packets are routed.
+* `-n, --interval` — Poisoning interval in seconds (default `2.0`).
+* `-V, --verbose` — Verbose output (prints resolved MACs and status).
+
