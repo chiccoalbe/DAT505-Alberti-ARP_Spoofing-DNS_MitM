@@ -1,0 +1,5 @@
+{
+  "mode": "whitelist",
+  "domains": ["www.dat505.alberti", "www.non.existent"],
+  "forward_non_target": true
+}
