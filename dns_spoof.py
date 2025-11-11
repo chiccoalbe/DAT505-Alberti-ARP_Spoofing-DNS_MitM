@@ -1,3 +1,17 @@
+"""
+dns_spoof.py
+Usage example:
+ sudo python3 dns_spoof.py 
+    -v 192.168.200.129 
+    -c ./dns_spoof_config.json 
+    -d 192.168.200.131 
+    -t 192.168.200.128 
+    -I eth0 
+    -V
+    
+This is compliant with request from task 1 of DAT505 assignment 2
+"""
+
 from datetime import datetime
 from scapy.all import *
 import signal

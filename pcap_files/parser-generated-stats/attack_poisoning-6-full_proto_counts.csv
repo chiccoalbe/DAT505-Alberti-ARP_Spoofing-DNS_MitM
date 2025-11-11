@@ -1,0 +1,4 @@
+proto_number,proto_name,count
+17,UDP,1072
+1,ICMP,8
+6,TCP,24

@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-pcap_parser.py
+traffic_interceptor.py
+
+Parser that takes pcap ad extracts 
+
 Usage:
   python3 pcap_parser.py /path/to/file.pcap
 

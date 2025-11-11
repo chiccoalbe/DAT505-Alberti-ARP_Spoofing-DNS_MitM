@@ -2,14 +2,14 @@
 """
 arp_spoof.py
 Usage example:
-  sudo python3 arp_spoof.py -i eth0 -v 192.168.200.129 -g 192.168.200.131 --enable-forward -n 2 -V
+  sudo python3 arp_spoof.py 
+  -i eth0 
+  -v 192.168.200.129 
+  -g 192.168.200.131 
+  --enable-forward 
+  -n 2 
+  -V
 
-Features:
-- Poison victim and gateway ARP caches (transparent MitM).
-- Auto-detect MACs (or you can supply them).
-- Enable/disable IP forwarding.
-- Graceful restore on exit.
-- Verbose mode.
 
 This is compliant with request from task 1 of DAT505 assignment 2
 """
